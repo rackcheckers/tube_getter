@@ -37,7 +37,7 @@ module TubeGetter
       # ------------------------------------------------------------------------------------------------------------
   
       def self.slug
-        "vidlearn"
+        "videarn"
       end
   
       def self.get_id_from_url(url)
