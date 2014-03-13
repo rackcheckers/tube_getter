@@ -13,7 +13,8 @@ task :get, :url do |t, args|
   require 'tube_getter'
   
   TubeGetter::Config.configure do |c|
-    c.base_path = "/Users/rc/Sites/tube_getter/tube_getter.bak"
+    c.temp_path = ENV['VIDEO_TEMP_PATH']
+    c.video_path = ENV['VIDEO_FILES_PATH']
   end
   
   crawler_class = TubeGetter::CrawlerFactory.get_crawler_from_url(args[:url])
