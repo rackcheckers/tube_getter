@@ -20,11 +20,11 @@ module TubeGetter
       end
   
       def target_filename
-        File.join TubeGetter::Config.base_path, 'videos', filename
+        File.join TubeGetter::Config.video_path, filename
       end
   
       def temp_filename
-        File.join TubeGetter::Config.base_path, 'temp', filename
+        File.join TubeGetter::Config.temp_path, filename
       end
       
       def crawl(*args)

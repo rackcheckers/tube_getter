@@ -45,9 +45,4 @@
 #     
 #   end
 #   
-#   def temp_filename
-#     raise "No filename set! Make sure to define @filename." unless @filename.present?
-#     File.join TubeGetter::Config.base_path, 'temp', @filename
-#   end
-#   
 # end
