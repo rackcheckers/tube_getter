@@ -17,7 +17,7 @@ module TubeGetter
     
         puts `wget -c -O "#{temp_filename}" "#{video_url}"`
     
-        puts `#{TubeGetter::Config.ffmpeg_path} -y -i "#{temp_filename}" -vcodec h264 -strict -2 -acodec aac "#{target_filename}"`
+        puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec #{TubeGetter::Config.ffmpeg_video_codec} -acodec #{TubeGetter::Config.ffmpeg_audio_codec} "#{target_filename}"`
     
         if File.exist?(target_filename) && File.size(target_filename) > 0
           `rm "#{temp_filename}"`
