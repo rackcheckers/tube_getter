@@ -23,7 +23,7 @@ module TubeGetter
     
         puts `wget -c -O "#{temp_filename}" "#{video_url}"`
     
-        puts `ffmpeg -y -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
+        puts `#{TubeGetter::Config.ffmpeg_path} -y -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
     
         if File.exist?(target_filename) && File.size(target_filename) > 0
           `rm "#{temp_filename}"`
