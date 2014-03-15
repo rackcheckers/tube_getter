@@ -2,12 +2,10 @@ module TubeGetter
   module Crawler
     class Youporn < Base
       
-      def crawl(url)
-        @url = url
-        
+      def crawl
         self.add_cookies()
         
-        doc = self.get(url)
+        doc = self.get(original_url)
         
         puts "\n" + (doc / 'title').inner_text + "\n\n"
         

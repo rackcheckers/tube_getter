@@ -2,14 +2,12 @@
 
 # class Cliphunter < Crawler
 #   
-#   def initialize
+#   def initialize(url)
 #     super
 #     @agent.user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
 #   end
 #   
-#   def crawl(url)
-#     uri = Addressable::URI.parse(url)
-#     
+#   def crawl
 #     id = url.gsub(/.*\/w\/(\d+)\/.*/, "\\1")
 #     
 #     @filename = "cliphunter - " + id + ".mp4"

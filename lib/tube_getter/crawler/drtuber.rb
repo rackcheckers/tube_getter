@@ -2,15 +2,12 @@ module TubeGetter
   module Crawler
     class Drtuber < Base
   
-      def initialize
+      def initialize(url)
         super
         @agent.user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
       end
   
-      def crawl(url)
-        @url = url
-    
-        uri = Addressable::URI.parse(url)
+      def crawl
         uri.subdomain = 'm'
     
         doc = self.get(uri.to_s)
@@ -30,7 +27,11 @@ module TubeGetter
         end
     
       end
-  
+      
+      def title
+        @doc ||= self.get()
+      end
+      
       # ------------------------------------------------------------------------------------------------------------
   
       def self.slug

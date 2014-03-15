@@ -2,11 +2,15 @@ module TubeGetter
   module Crawler
     class Base
       
-      def initialize
+      attr_accessor :original_url, :uri, :doc
+      
+      def initialize(url)
         @agent = Mechanize.new
         @agent.user_agent_alias = 'Windows IE 7'
+        @original_url = url
+        @uri = Addressable::URI.parse(url)
       end
-  
+      
       def get(*args)
         @agent.get(*args)
       end
@@ -16,7 +20,7 @@ module TubeGetter
       end
   
       def filename
-        self.class.filename(@url)
+        self.class.filename(original_url)
       end
   
       def target_filename
@@ -29,6 +33,10 @@ module TubeGetter
       
       def crawl(*args)
         raise "Crawl method is not implemented! Please override this method."
+      end
+      
+      def title
+        raise "Title method is not implemented! Please override this method."
       end
       
       # ------------------------------------------------------------------------------------------------------------

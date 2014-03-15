@@ -2,11 +2,9 @@ module TubeGetter
   module Crawler
     class Playvid < Base
       
-      def crawl(url)
-        @url = url
-    
-        doc = self.get(url)
-    
+      def crawl
+        doc = self.get(original_url)
+        
         puts "\n" + (doc / 'title').inner_text + "\n\n"
         
         # Get the embed and attach the flashvars to a fake URI,

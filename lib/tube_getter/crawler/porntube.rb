@@ -2,10 +2,8 @@ module TubeGetter
   module Crawler
     class Porntube < Base
   
-      def crawl(url)
-        @url = url
-    
-        doc = self.get(url)
+      def crawl
+        doc = self.get(original_url)
     
         puts "\n" + (doc / 'title').inner_text + "\n\n"
     

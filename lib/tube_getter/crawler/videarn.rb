@@ -2,16 +2,12 @@ module TubeGetter
   module Crawler
     class Videarn < Base
   
-      def initialize
+      def initialize(url)
         super
         @agent.user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
       end
   
-      def crawl(url)
-        @url = url
-    
-        uri = Addressable::URI.parse(url)
-    
+      def crawl
         uri = Addressable::URI.parse('http://m.videarn.com')
         uri.path = 'video.php'
         uri.query_values = {id: self.class.get_id_from_url(url)}

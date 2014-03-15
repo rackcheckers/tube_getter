@@ -2,18 +2,15 @@ module TubeGetter
   module Crawler
     class Xplay < Base
   
-      def initialize
+      def initialize(url)
         super
         @agent.user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
         @agent.follow_meta_refresh = true
         add_cookies
       end
   
-      def crawl(url)
-        @url = url
-    
-        uri = Addressable::URI.parse(url)
-    
+      def crawl
+        
         begin
           # try to get the mobile version
           uri.path = "/mobile" + uri.path
@@ -30,7 +27,7 @@ module TubeGetter
         rescue Mechanize::ResponseCodeError
           # no mobile version -> get the flv
       
-          doc = self.get(url)
+          doc = self.get(original_url)
       
           puts "\n" + (doc / 'title').inner_text + "\n\n"
       
