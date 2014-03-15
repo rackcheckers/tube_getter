@@ -1,4 +1,4 @@
-require 'addressable/uri'
+require 'addressabler'
 require 'mechanize'
 
 require "tube_getter/version"
