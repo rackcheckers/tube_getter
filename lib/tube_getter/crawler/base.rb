@@ -39,6 +39,15 @@ module TubeGetter
         raise "Title method is not implemented! Please override this method."
       end
       
+      def save_and_open(doc)
+        filename = "/tmp/#{SecureRandom.uuid}.html"
+        File.open(filename, "w") do |f|
+          f.write(doc)
+        end
+        
+        `open #{filename}`
+      end
+      
       # ------------------------------------------------------------------------------------------------------------
       
       def self.needs_conversion?
@@ -56,7 +65,7 @@ module TubeGetter
       def self.get_id_from_url(url)
         raise "get_id_from_url method not implemented! Please override this method."
       end
-  
+      
     end
   end
 end
