@@ -40,9 +40,11 @@ module TubeGetter
       end
       
       def save_and_open(doc)
+        text = (doc.respond_to?(:body) ? doc.body : doc)
+        
         filename = "/tmp/#{SecureRandom.uuid}.html"
         File.open(filename, "w") do |f|
-          f.write(doc)
+          f.write(text)
         end
         
         `open #{filename}`

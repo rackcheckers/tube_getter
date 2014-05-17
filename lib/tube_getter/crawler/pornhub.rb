@@ -9,10 +9,10 @@ module TubeGetter
   
       def crawl
         doc = self.get(original_url)
-    
+        
         puts "\n" + (doc / 'title').inner_text + "\n\n"
     
-        video_url = doc.at('.video_hub/.thumb/div/a#video_link')['href']
+        video_url = doc.at('a#videoLinkPlaceholder')['href']
     
         puts `wget -c -O "#{temp_filename}" "#{video_url}"`
     
@@ -23,7 +23,19 @@ module TubeGetter
         end
     
       end
+      
+      def add_cookies
+        self.add_cookie("use_html5_player", "1")
+        self.add_cookie("age_verified", "1")
+      end
   
+      def add_cookie(key, value)
+        cookie = Mechanize::Cookie.new(key, value)
+        cookie.domain = ".pornhub.com"
+        cookie.path = "/"
+        @agent.cookie_jar.add("http://www.pornhub.com", cookie)
+      end
+      
       # ------------------------------------------------------------------------------------------------------------
   
       def self.slug
