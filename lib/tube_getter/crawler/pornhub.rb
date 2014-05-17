@@ -14,14 +14,7 @@ module TubeGetter
     
         video_url = doc.at('a#videoLinkPlaceholder')['href']
     
-        puts `wget -c -O "#{temp_filename}" "#{video_url}"`
-    
-        puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
-    
-        if File.exist?(target_filename) && File.size(target_filename) > 0
-          `rm "#{temp_filename}"`
-        end
-    
+        puts `wget -c -O "#{target_filename}" "#{video_url}"`
       end
       
       def add_cookies
