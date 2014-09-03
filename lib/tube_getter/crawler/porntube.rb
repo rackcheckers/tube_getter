@@ -23,7 +23,7 @@ module TubeGetter
     
         video_url = json[largest_size]['token']
     
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
       end
   
       # ------------------------------------------------------------------------------------------------------------

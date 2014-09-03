@@ -15,7 +15,7 @@ module TubeGetter
         video_urls = fake_uri.query_values.select{|k, v| k.match(/^video_vars\[video_urls\]\[\d+p\]$/) && v!=""}
         video_url = video_urls.sort_by{|k, v| k}.last[1]
         
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
         
 #         puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
 #         

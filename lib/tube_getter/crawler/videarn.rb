@@ -13,7 +13,7 @@ module TubeGetter
         
         puts video_url
         
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
       end
   
       # ------------------------------------------------------------------------------------------------------------

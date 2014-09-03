@@ -10,13 +10,11 @@ module TubeGetter
       def crawl
         doc = self.get(original_url)
         
-        save_and_open(doc)
-        
         puts "\n" + (doc / 'title').inner_text + "\n\n"
     
         video_url = doc.at('a#video_link')['href']
     
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
       end
       
       def add_cookies

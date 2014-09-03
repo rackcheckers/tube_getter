@@ -53,7 +53,7 @@ module TubeGetter
           
           puts original_url
       
-          puts `wget -c -O "#{target_filename}" "#{original_url}"`
+          wget(original_url, target_filename)
         else
           puts "Sorry - unhandled source"
           puts "\n\n#{video_container.to_s}\n\n"

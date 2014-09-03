@@ -2,7 +2,7 @@ module TubeGetter
   module Crawler
     class Base
       
-      attr_accessor :original_url, :uri, :doc
+      attr_accessor :original_url, :uri, :doc, :download_progress
       
       def initialize(url)
         @agent = Mechanize.new
@@ -48,6 +48,21 @@ module TubeGetter
         end
         
         `open #{filename}`
+      end
+      
+      def wget(url, filename)
+        progress_regex = /.* \.{10} \.{10} \.{10} \.{10} \.{10} (\d+)%.*/
+        
+        IO.popen("wget -c -O \"#{filename}\" \"#{url}\" 2>&1", "r") do |pipe|
+          pipe.each do |line|
+            if line.match(progress_regex)
+              @download_progress = line.gsub(progress_regex, "\\1").to_i
+              sleep 1
+            end
+          end
+        end
+        
+        @download_progress = 100 if @download_progress > 0
       end
       
       # ------------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@ module TubeGetter
     
         a = doc.at('object/video/div.noFlash/a.mp4Thumb')
     
-        puts `wget -c -O "#{target_filename}" "#{a['href']}"`
+        wget(a['href'], target_filename)
       end
       
       # ------------------------------------------------------------------------------------------------------------

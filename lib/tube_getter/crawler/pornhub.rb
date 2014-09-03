@@ -14,7 +14,7 @@ module TubeGetter
     
         video_url = doc.at('a#videoLinkPlaceholder')['href']
     
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
       end
       
       def add_cookies

@@ -25,7 +25,7 @@ module TubeGetter
         
         puts video_url
         
-        puts `wget -c -O "#{target_filename}" "#{video_url}"`
+        wget(video_url, target_filename)
         
         # puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec #{TubeGetter::Config.ffmpeg_video_codec} -acodec #{TubeGetter::Config.ffmpeg_audio_codec} "#{target_filename}"`
         #     
