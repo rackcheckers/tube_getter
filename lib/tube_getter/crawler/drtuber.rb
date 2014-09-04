@@ -1,30 +1,23 @@
 module TubeGetter
   module Crawler
     class Drtuber < Base
-  
-      def initialize(url)
-        super
-        @agent.user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
-      end
-  
+
       def crawl
-        uri.subdomain = 'm'
+        # uri.subdomain = 'm'
     
         doc = self.get(uri.to_s)
-    
+        
         puts "\n" + (doc / 'title').inner_text + "\n\n"
+        
+        video_url = doc.at('#hidden_html5_block/video/source')['src']
+        
+        wget(video_url + '&play', target_filename)
     
-        video_url = uri.normalized_host + doc.at('.links3_big/a[data-link_type="mp4"]')['href']
-    
-        puts video_url
-    
-        wget(video_url, temp_filename)
-    
-        puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
-    
-        if File.exist?(target_filename) && File.size(target_filename) > 0
-          `rm "#{temp_filename}"`
-        end
+        # puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
+        #
+        # if File.exist?(target_filename) && File.size(target_filename) > 0
+        #   `rm "#{temp_filename}"`
+        # end
     
       end
       
