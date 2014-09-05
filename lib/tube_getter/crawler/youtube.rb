@@ -1,11 +1,11 @@
 module TubeGetter
   module Crawler
-    class Youjizz < YoutubeDlBase
+    class Youtube < YoutubeDlBase
 
       # ------------------------------------------------------------------------------------------------------------
 
       def self.slug
-        "youjizz"
+        "youtube"
       end
 
     end
