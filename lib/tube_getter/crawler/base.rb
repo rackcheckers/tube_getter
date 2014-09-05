@@ -39,6 +39,10 @@ module TubeGetter
         raise "Title method is not implemented! Please override this method."
       end
       
+      def needs_conversion
+        raise "needs_conversion method is not implemented! Please override this method."
+      end
+      
       def save_and_open(doc)
         text = (doc.respond_to?(:body) ? doc.body : doc)
         
