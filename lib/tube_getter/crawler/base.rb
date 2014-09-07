@@ -2,13 +2,14 @@ module TubeGetter
   module Crawler
     class Base
       
-      attr_accessor :original_url, :uri, :doc, :download_progress
+      attr_accessor :original_url, :uri, :doc, :download_progress, :done
       
       def initialize(url)
         @agent = Mechanize.new
         @agent.user_agent_alias = 'Windows IE 7'
         @original_url = url
         @uri = Addressable::URI.parse(url)
+        @done = false
       end
       
       def get(*args)
@@ -57,6 +58,8 @@ module TubeGetter
       def wget(url, filename)
         progress_regex = /.* \.{10} \.{10} \.{10} \.{10} \.{10} (\d+)%.*/
         
+        @download_progress = 0
+        
         IO.popen("wget -c -O \"#{filename}\" \"#{url}\" 2>&1", "r") do |pipe|
           pipe.each do |line|
             if line.match(progress_regex)
@@ -66,6 +69,7 @@ module TubeGetter
           end
         end
         
+        @done = true
         @download_progress = 100 if @download_progress > 0
       end
       
