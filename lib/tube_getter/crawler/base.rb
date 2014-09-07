@@ -61,12 +61,15 @@ module TubeGetter
         @download_progress = 0
         
         IO.popen("wget -c -O \"#{filename}\" \"#{url}\" 2>&1", "r") do |pipe|
-          pipe.each do |line|
+          while line = pipe.gets
             if line.match(progress_regex)
               @download_progress = line.gsub(progress_regex, "\\1").to_i
               sleep 1
             end
           end
+          
+          pipe.close
+          puts "Pipe exited with #{$?}"
         end
         
         @done = true

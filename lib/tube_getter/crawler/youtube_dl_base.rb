@@ -12,13 +12,14 @@ module TubeGetter
         @download_progress = 0
         
         IO.popen("#{self.class.youtube_dl_bin} --newline -v -f best -o \"#{target_filename}\" \"#{original_url}\" 2>&1", "r") do |pipe|
-           while line = io.gets
+          while line = pipe.gets
             if line.match(progress_regex)
               @download_progress = line.gsub(progress_regex, "\\1").to_i
               sleep 1
             end
           end
-          io.close
+          
+          pipe.close
           puts "Pipe exited with #{$?}"
         end
         

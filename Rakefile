@@ -26,4 +26,9 @@ task :get, :url do |t, args|
   crawler = crawler_class.new(args[:url])
   
   crawler.crawl
+  
+  while crawler.download_progress < 100 && !crawler.done do
+    puts crawler.download_progress
+    sleep 1
+  end
 end
