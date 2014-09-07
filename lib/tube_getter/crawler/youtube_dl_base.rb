@@ -7,7 +7,18 @@ module TubeGetter
       end
       
       def youtube_dl
-        puts `#{self.class.youtube_dl_bin} -v -f best -o \"#{target_filename}\" \"#{original_url}\"`
+        progress_regex = /.*\s+(\d+\.\d+)%\s+of\s+.*/
+        
+        IO.popen("#{self.class.youtube_dl_bin} --newline -v -f best -o \"#{target_filename}\" \"#{original_url}\" 2>&1", "r") do |pipe|
+          pipe.each do |line|
+            if line.match(progress_regex)
+              @download_progress = line.gsub(progress_regex, "\\1").to_i
+              sleep 1
+            end
+          end
+        end
+        
+        @download_progress = 100 if @download_progress > 0
       end
       
       # ------------------------------------------------------------------------------------------------------------
