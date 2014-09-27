@@ -21,7 +21,11 @@ module TubeGetter
       def self.get_id_from_url(url)
         url.gsub(/.+\/movies\/(\d+)\/.*/, "\\1")
       end
-  
+      
+      def self.needs_conversion?
+        false
+      end
+      
     end
   end
 end

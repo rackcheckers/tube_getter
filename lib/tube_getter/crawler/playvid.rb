@@ -16,12 +16,6 @@ module TubeGetter
         video_url = video_urls.sort_by{|k, v| k}.last[1]
         
         wget(video_url, target_filename)
-        
-#         puts `#{TubeGetter::Config.ffmpeg_path} #{TubeGetter::Config.ffmpeg_default_options} -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
-#         
-#         if File.exist?(target_filename) && File.size(target_filename) > 0
-#           `rm "#{temp_filename}"`
-#         end
       end
       
       # ------------------------------------------------------------------------------------------------------------
@@ -37,6 +31,10 @@ module TubeGetter
         else
           url.gsub(/.*\/watch\/([0-9a-z\-]+)/i, "\\1")
         end
+      end
+      
+      def self.needs_conversion?
+        false
       end
       
     end

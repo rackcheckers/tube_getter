@@ -33,7 +33,11 @@ module TubeGetter
     
         return id
       end
-  
+      
+      def self.needs_conversion?
+        false
+      end
+      
     end
   end
 end

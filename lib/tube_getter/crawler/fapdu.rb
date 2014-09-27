@@ -43,7 +43,12 @@ module TubeGetter
           youporn_id = video_container.at('iframe')['src'].gsub(/.*embed\/(\d+).*/, "\\1")
           
           Youporn.new("http://www.youporn.com/watch/#{youporn_id}/").crawl
+        elsif video_container.at('iframe') && video_container.at('iframe')['src'].match(/^http.*?youjizz\.com\/.*/)
+          puts "Youporn"
       
+          youporn_id = video_container.at('iframe')['src'].gsub(/.*embed\/(\d+).*/, "\\1")
+          
+          Youporn.new("http://www.youporn.com/watch/#{youporn_id}/").crawl
         elsif video_container.at('#faptv')
           puts "Fapdu"
       

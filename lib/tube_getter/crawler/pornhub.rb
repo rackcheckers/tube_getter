@@ -39,7 +39,11 @@ module TubeGetter
         uri = Addressable::URI.parse url
         uri.query_values['viewkey'].strip
       end
-  
+      
+      def self.needs_conversion?
+        false
+      end
+      
     end
   end
 end

@@ -18,14 +18,7 @@ module TubeGetter
     
         puts video_url
     
-        wget(video_url, temp_filename)
-    
-        puts `#{TubeGetter::Config.ffmpeg_path} -y -i "#{temp_filename}" -vcodec copy -acodec copy "#{target_filename}"`
-    
-        if File.exist?(target_filename) && File.size(target_filename) > 0
-          `rm "#{temp_filename}"`
-        end
-    
+        wget(video_url, target_filename)
       end
   
       # ------------------------------------------------------------------------------------------------------------
@@ -37,7 +30,11 @@ module TubeGetter
       def self.get_id_from_url(url)
         url.gsub(/.*\/video\/(\d+)\/.*/, "\\1")
       end
-  
+      
+      def self.needs_conversion?
+        true
+      end
+      
     end
   end
 end

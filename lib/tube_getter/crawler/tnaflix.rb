@@ -7,7 +7,11 @@ module TubeGetter
       def self.slug
         "tnaflix"
       end
-
+      
+      def self.needs_conversion?
+        false
+      end
+      
     end
   end
 end
